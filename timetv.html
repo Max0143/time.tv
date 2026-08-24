@@ -1,32 +1,2155 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<div class="player-box">
+<title>TIME TV — Твій час розваг</title>
 
-    <div class="twitch-player">
+<meta name="description"
+content="TIME TV — телеканал. Прямий ефір, програма передач, новини та відео.">
 
-        <iframe
-            src="https://player.twitch.tv/?channel=itv_time&parent=timetv.html"
-            height="100%"
-            width="100%"
-            allowfullscreen>
-        </iframe>
+<style>
 
-        <div class="live-badge">
-            <span class="live-dot"></span>
-            НАЖИВО
-        </div>
+/* =========================================================
+   TIME TV
+   Updated ICTIME-inspired design
+   ========================================================= */
 
-    </div>
+:root {
+    --orange: #f36b21;
+    --orange-dark: #d95712;
+    --orange-light: #fff1e8;
 
-    <div class="player-info">
+    --black: #222;
+    --gray: #686868;
+    --light: #f7f7f7;
+    --white: #fff;
 
-        <div class="now">
-            TIME TV — прямий ефір
-        </div>
+    --border: #e6e6e6;
 
-        <div class="next">
-            Дивіться онлайн на Twitch
-        </div>
+    --max-width: 1180px;
+}
 
-    </div>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--black);
+    background: var(--white);
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: var(--orange);
+
+    box-shadow: 0 2px 15px rgba(0,0,0,.16);
+}
+
+.header-inner {
+    max-width: var(--max-width);
+    min-height: 78px;
+
+    margin: auto;
+    padding: 10px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.logo {
+    display: flex;
+    align-items: center;
+
+    text-decoration: none;
+
+    min-width: 180px;
+}
+
+.logo svg {
+    width: 175px;
+    height: 55px;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.nav {
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+}
+
+.nav button {
+    border: 0;
+    outline: none;
+
+    background: transparent;
+    color: white;
+
+    padding: 11px 13px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: .2s;
+}
+
+.nav button:hover {
+    background: rgba(255,255,255,.18);
+}
+
+.nav button.active {
+    background: white;
+    color: var(--orange);
+}
+
+
+/* =========================================================
+   LIVE BUTTON
+   ========================================================= */
+
+.live-button {
+    border: 2px solid white;
+
+    background: transparent;
+    color: white;
+
+    padding: 10px 15px;
+
+    border-radius: 6px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.live-button:hover {
+    background: white;
+    color: var(--orange);
+}
+
+
+/* =========================================================
+   MOBILE BUTTON
+   ========================================================= */
+
+.mobile-menu {
+    display: none;
+
+    border: 0;
+    background: transparent;
+
+    color: white;
+
+    font-size: 30px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   PAGES
+   ========================================================= */
+
+.page {
+    display: none;
+
+    animation: pageIn .3s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes pageIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(7px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+    background:
+        linear-gradient(
+            110deg,
+            var(--orange-light),
+            #fff
+        );
+
+    border-bottom: 1px solid var(--border);
+}
+
+.hero-inner {
+    max-width: var(--max-width);
+
+    margin: auto;
+
+    padding:
+        68px 20px
+        62px;
+}
+
+.hero-small {
+    display: inline-block;
+
+    color: var(--orange);
+
+    font-size: 13px;
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 12px;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 6vw, 68px);
+
+    line-height: 1.05;
+
+    margin-bottom: 18px;
+}
+
+.hero h1 span {
+    color: var(--orange);
+}
+
+.hero p {
+    max-width: 650px;
+
+    color: var(--gray);
+
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.container {
+    max-width: var(--max-width);
+
+    margin: auto;
+
+    padding:
+        0 20px
+        65px;
+}
+
+
+/* =========================================================
+   SECTION
+   ========================================================= */
+
+.section {
+    padding-top: 45px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+}
+
+.section-title::before {
+    content: "";
+
+    width: 5px;
+    height: 30px;
+
+    background: var(--orange);
+
+    border-radius: 3px;
+}
+
+.section-title h2 {
+    font-size: 28px;
+}
+
+
+/* =========================================================
+   PLAYER
+   ========================================================= */
+
+.player-container {
+    max-width: 1050px;
+
+    margin: auto;
+}
+
+.player {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    background: #111;
+
+    overflow: hidden;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 12px 35px
+        rgba(0,0,0,.18);
+}
+
+.player video {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: contain;
+
+    background: #000;
+}
+
+.live-label {
+    position: absolute;
+
+    left: 15px;
+    top: 15px;
+
+    padding: 6px 11px;
+
+    background: var(--orange);
+
+    color: white;
+
+    border-radius: 4px;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.live-dot {
+    display: inline-block;
+
+    width: 7px;
+    height: 7px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    margin-right: 5px;
+
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+
+    50% {
+        opacity: .25;
+    }
+
+}
+
+.player-info {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px 18px;
+
+    border:
+        1px solid var(--border);
+
+    border-top: 0;
+
+    background: white;
+}
+
+.player-title {
+    font-weight: bold;
+}
+
+.player-next {
+    color: var(--gray);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.card {
+    background: white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 8px;
+
+    padding: 24px;
+
+    transition: .2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.08);
+}
+
+.card-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--orange-light);
+
+    color: var(--orange);
+
+    border-radius: 8px;
+
+    font-size: 23px;
+
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: var(--gray);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   PROGRAM
+   ========================================================= */
+
+.program {
+    max-width: 850px;
+}
+
+.program-item {
+    display: grid;
+
+    grid-template-columns:
+        90px 1fr auto;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 18px;
+
+    margin-bottom: 8px;
+
+    background: white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 7px;
+}
+
+.program-item.current {
+    border-color: var(--orange);
+
+    background: var(--orange-light);
+}
+
+.program-time {
+    color: var(--orange);
+
+    font-weight: bold;
+}
+
+.program-name {
+    font-weight: bold;
+}
+
+.program-status {
+    color: var(--gray);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   NEWS
+   ========================================================= */
+
+.news-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+.news {
+    border:
+        1px solid var(--border);
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    background: white;
+}
+
+.news-image {
+    height: 190px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--orange),
+            #ff9a5a
+        );
+
+    color: white;
+
+    font-size: 40px;
+    font-weight: 900;
+}
+
+.news-content {
+    padding: 20px;
+}
+
+.news-date {
+    color: var(--orange);
+
+    font-size: 12px;
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+.news-content h3 {
+    margin-bottom: 8px;
+}
+
+.news-content p {
+    color: var(--gray);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   VIDEO
+   ========================================================= */
+
+.video-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.video {
+    border:
+        1px solid var(--border);
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    background: white;
+}
+
+.video-preview {
+    aspect-ratio: 16 / 9;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #252525;
+
+    color: white;
+
+    font-size: 35px;
+}
+
+.video h3 {
+    padding:
+        15px
+        15px
+        4px;
+}
+
+.video p {
+    color: var(--gray);
+
+    font-size: 13px;
+
+    padding:
+        0
+        15px
+        15px;
+}
+
+
+/* =========================================================
+   ABOUT
+   ========================================================= */
+
+.about {
+    max-width: 850px;
+}
+
+.about p {
+    color: var(--gray);
+
+    margin-bottom: 18px;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
+
+.statistics {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-top: 30px;
+}
+
+.stat {
+    background: var(--orange-light);
+
+    border:
+        1px solid #ffd9c5;
+
+    padding: 22px;
+
+    border-radius: 8px;
+}
+
+.stat strong {
+    display: block;
+
+    color: var(--orange);
+
+    font-size: 27px;
+
+    margin-bottom: 5px;
+}
+
+.stat span {
+    color: var(--gray);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   CONTACTS
+   ========================================================= */
+
+.contact-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+.contact {
+    padding: 25px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 8px;
+}
+
+.contact h3 {
+    margin-bottom: 8px;
+}
+
+.contact p {
+    color: var(--gray);
+}
+
+
+/* =========================================================
+   SOCIAL NETWORKS
+   ========================================================= */
+
+.social {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.social a {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: white;
+
+    text-decoration: none;
+
+    background: var(--orange);
+
+    padding:
+        10px
+        14px;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: .2s;
+}
+
+.social a:hover {
+    background: var(--orange-dark);
+
+    transform: translateY(-2px);
+}
+
+.social-icon {
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+    margin-top: 30px;
+
+    background: var(--orange);
+
+    color: white;
+
+    padding: 35px 20px;
+}
+
+.footer-inner {
+    max-width: var(--max-width);
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+.footer-logo {
+    font-size: 24px;
+
+    font-weight: 900;
+}
+
+.footer p {
+    font-size: 13px;
+
+    opacity: .9;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width: 950px) {
+
+    .nav {
+        display: none;
+
+        position: absolute;
+
+        top: 78px;
+
+        left: 0;
+        right: 0;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        padding: 10px 15px;
+
+        background: var(--orange);
+
+        box-shadow:
+            0 8px 15px
+            rgba(0,0,0,.15);
+    }
+
+    .nav.open {
+        display: flex;
+    }
+
+    .nav button {
+        width: 100%;
+
+        text-align: left;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .live-button {
+        display: none;
+    }
+
+    .cards,
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .news-grid,
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .statistics {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media(max-width: 600px) {
+
+    .header-inner {
+        min-height: 65px;
+    }
+
+    .logo svg {
+        width: 145px;
+    }
+
+    .hero-inner {
+        padding:
+            45px
+            18px;
+    }
+
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .program-item {
+        grid-template-columns:
+            65px 1fr;
+    }
+
+    .program-status {
+        grid-column: 2;
+    }
+
+    .player-info {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 6px;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+<div class="header-inner">
+
+
+<!-- LOGO -->
+
+<a href="#"
+   class="logo"
+   onclick="openPage('home'); return false;">
+
+<svg
+viewBox="0 0 360 110"
+xmlns="http://www.w3.org/2000/svg">
+
+    <!-- TIME -->
+
+    <text
+        x="0"
+        y="70"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="70"
+        font-weight="900"
+        fill="white"
+        letter-spacing="-4">
+        TIME
+    </text>
+
+
+    <!-- TV -->
+
+    <rect
+        x="225"
+        y="17"
+        width="125"
+        height="72"
+        rx="8"
+        fill="white"/>
+
+
+    <text
+        x="240"
+        y="72"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="45"
+        font-weight="900"
+        fill="#f36b21">
+        TV
+    </text>
+
+
+    <!-- UNDERLINE -->
+
+    <rect
+        x="0"
+        y="88"
+        width="210"
+        height="5"
+        rx="2"
+        fill="white"/>
+
+</svg>
+
+</a>
+
+
+<!-- MOBILE MENU -->
+
+<button
+class="mobile-menu"
+onclick="toggleMenu()">
+
+☰
+
+</button>
+
+
+<!-- NAVIGATION -->
+
+<nav
+class="nav"
+id="nav">
+
+
+<button
+class="active"
+onclick="openPage('home',this)">
+Головна
+</button>
+
+
+<button
+onclick="openPage('live',this)">
+Прямий ефір
+</button>
+
+
+<button
+onclick="openPage('program',this)">
+Програма
+</button>
+
+
+<button
+onclick="openPage('news',this)">
+Новини
+</button>
+
+
+<button
+onclick="openPage('videos',this)">
+Відео
+</button>
+
+
+<button
+onclick="openPage('about',this)">
+Про канал
+</button>
+
+
+<button
+onclick="openPage('contacts',this)">
+Контакти
+</button>
+
+
+</nav>
+
+
+<!-- LIVE BUTTON -->
+
+<button
+class="live-button"
+onclick="openPage('live')">
+
+▶ Дивитися наживо
+
+</button>
+
 
 </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     HOME
+===================================================== -->
+
+<section
+id="home"
+class="page active">
+
+
+<div class="hero">
+
+<div class="hero-inner">
+
+<span class="hero-small">
+TIME TV
+</span>
+
+<h1>
+Твій час
+<span>розваг</span>
+</h1>
+
+<p>
+Ласкаво просимо на офіційний сайт
+TIME TV. Дивіться прямий ефір,
+знайомтеся з програмою передач,
+новинами та відео.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="container">
+
+
+<div class="section">
+
+
+<div class="section-title">
+
+<h2>
+Прямий ефір
+</h2>
+
+</div>
+
+
+<div class="player-container">
+
+
+<div class="player">
+
+
+<video
+id="homeVideo"
+controls
+playsinline>
+
+<!--
+ЗАМЕНИТЕ video.mp4
+НА ВАШ ВИДЕОПОТОК
+-->
+
+<source
+src="video.mp4"
+type="video/mp4">
+
+Ваш браузер не підтримує відео.
+
+</video>
+
+
+<div class="live-label">
+
+<span class="live-dot"></span>
+
+LIVE
+
+</div>
+
+
+</div>
+
+
+<div class="player-info">
+
+<div class="player-title">
+TIME TV — Прямий ефір
+</div>
+
+<div class="player-next">
+Далі: Новини TIME TV
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<div class="section">
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<div class="card-icon">
+▶
+</div>
+
+<h3>
+Прямий ефір
+</h3>
+
+<p>
+Дивіться TIME TV онлайн
+у будь-який час.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+▣
+</div>
+
+<h3>
+Програма передач
+</h3>
+
+<p>
+Переглядайте розклад
+майбутніх передач.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+★
+</div>
+
+<h3>
+Новини та відео
+</h3>
+
+<p>
+Свіжі матеріали та
+найцікавіші відео TIME TV.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     LIVE
+===================================================== -->
+
+<section
+id="live"
+class="page">
+
+
+<div class="hero">
+
+<div class="hero-inner">
+
+<span class="hero-small">
+TIME TV ONLINE
+</span>
+
+<h1>
+Прямий
+<span>ефір</span>
+</h1>
+
+<p>
+Дивіться TIME TV наживо.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="container">
+
+<div class="section">
+
+<div class="player-container">
+
+<div class="player">
+
+<video
+id="liveVideo"
+controls
+playsinline>
+
+<source
+src="video.mp4"
+type="video/mp4">
+
+</video>
+
+
+<div class="live-label">
+
+<span class="live-dot"></span>
+
+LIVE
+
+</div>
+
+</div>
+
+
+<div class="player-info">
+
+<div class="player-title">
+TIME TV
+</div>
+
+<div class="player-next">
+Ефір онлайн
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROGRAM
+===================================================== -->
+
+<section
+id="program"
+class="page">
+
+
+<div class="hero">
+
+<div class="hero-inner">
+
+<span class="hero-small">
+TIME TV
+</span>
+
+<h1>
+Програма
+<span>передач</span>
+</h1>
+
+<p>
+Розклад ефіру TIME TV.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="container">
+
+<div class="section">
+
+<div class="program">
+
+
+<div class="program-item current">
+
+<div class="program-time">
+08:00
+</div>
+
+<div class="program-name">
+Ранковий ефір
+</div>
+
+<div class="program-status">
+Зараз
+</div>
+
+</div>
+
+
+<div class="program-item">
+
+<div class="program-time">
+10:00
+</div>
+
+<div class="program-name">
+Новини TIME TV
+</div>
+
+<div class="program-status">
+Далі
+</div>
+
+</div>
+
+
+<div class="program-item">
+
+<div class="program-time">
+12:00
+</div>
+
+<div class="program-name">
+Музичний час
+</div>
+
+<div class="program-status">
+—
+</div>
+
+</div>
+
+
+<div class="program-item">
+
+<div class="program-time">
+14:00
+</div>
+
+<div class="program-name">
+Інформаційний ефір
+</div>
+
+<div class="program-status">
+—
+</div>
+
+</div>
+
+
+<div class="program-item">
+
+<div class="program-time">
+18:00
+</div>
+
+<div class="program-name">
+Головні новини
+</div>
+
+<div class="program-status">
+—
+</div>
+
+</div>
+
+
+<div class="program-item">
+
+<div class="program-time">
+20:00
+</div>
+
+<div class="program-name">
+Вечірній TIME TV
+</div>
+
+<div class="program-status">
+—
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     NEWS
+===================================================== -->
+
+<section
+id="news"
+class="page">
+
+
+<div class="hero">
+
+<div class="hero-inner">
+
+<span class="hero-small">
+TIME TV NEWS
+</span>
+
+<h1>
+Наші
+<span>новини</span>
+</h1>
+
+<p>
+Останні події та новини TIME TV.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="container">
+
+<div class="section">
+
+<div class="news-grid">
+
+
+<article class="news">
+
+<div class="news-image">
+TIME TV
+</div>
+
+<div class="news-content">
+
+<div class="news-date">
+23 СЕРПНЯ 2026
+</div>
+
+<h3>
+TIME TV представляє оновлений сайт
+</h3>
+
+<p>
+Вітаємо на новому офіційному
+сайті телеканалу TIME TV.
+</p>
+
+</div>
+
+</article>
+
+
+<article class="news">
+
+<div class="news-image">
+LIVE
+</div>
+
+<div class="news-content">
+
+<div class="news-date">
+TIME TV
+</div>
+
+<h3>
+Прямий ефір онлайн
+</h3>
+
+<p>
+Слідкуйте за ефіром TIME TV
+безпосередньо через сайт.
+</p>
+
+</div>
+
+</article>
+
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     VIDEOS
+===================================================== -->
+
+<section
+id="videos"
+class="page">
+
+
+<div class="hero">
+
+<div class="hero-inner">
+
+<span class="hero-small">
+TIME TV VIDEO
+</span>
+
+<h1>
+Наше
+<span>відео</span>
+</h1>
+
+<p>
+Відеоматеріали та програми TIME TV.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="container">
+
+<div class="section">
+
+<div class="video-grid">
+
+
+<div class="video">
+
+<div class="video-preview">
+▶
+</div>
+
+<h3>
+Найкращі моменти TIME TV
+</h3>
+
+<p>
+Відео телеканалу
+</p>
+
+</div>
+
+
+<div class="video">
+
+<div class="video-preview">
+▶
+</div>
+
+<h3>
+Новини TIME TV
+</h3>
+
+<p>
+Інформаційні випуски
+</p>
+
+</div>
+
+
+<div class="video">
+
+<div class="video-preview">
+▶
+</div>
+
+<h3>
+Спеціальний ефір
+</h3>
+
+<p>
+Спеціальні програми
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section
+id="about"
+class="page">
+
+
+<div class="hero">
+
+<div class="hero-inner">
+
+<span class="hero-small">
+ПРО TIME TV
+</span>
+
+<h1>
+Про
+<span>канал</span>
+</h1>
+
+<p>
+Інформація про TIME TV.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="container">
+
+<div class="section">
+
+<div class="about">
+
+<p>
+<strong>TIME TV</strong> —
+телевізійний канал, створений
+для інформаційного та
+розважального контенту.
+</p>
+
+<p>
+На нашому сайті глядачі можуть
+дивитися прямий ефір, переглядати
+програму передач, новини та відео.
+</p>
+
+
+<div class="statistics">
+
+
+<div class="stat">
+
+<strong>24/7</strong>
+
+<span>
+Онлайн
+</span>
+
+</div>
+
+
+<div class="stat">
+
+<strong>HD</strong>
+
+<span>
+Якісне відео
+</span>
+
+</div>
+
+
+<div class="stat">
+
+<strong>ONLINE</strong>
+
+<span>
+Доступ з телефону
+</span>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTACTS
+===================================================== -->
+
+<section
+id="contacts"
+class="page">
+
+
+<div class="hero">
+
+<div class="hero-inner">
+
+<span class="hero-small">
+TIME TV
+</span>
+
+<h1>
+<span>Контакти</span>
+</h1>
+
+<p>
+Зв'яжіться з командою TIME TV.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="container">
+
+<div class="section">
+
+<div class="contact-grid">
+
+
+<!-- EMAIL -->
+
+<div class="contact">
+
+<h3>
+📧 Електронна пошта
+</h3>
+
+<p>
+info@timetv.example
+</p>
+
+</div>
+
+
+<!-- SOCIAL -->
+
+<div class="contact">
+
+<h3>
+🌐 Соціальні мережі
+</h3>
+
+<p>
+Слідкуйте за TIME TV
+в соціальних мережах.
+</p>
+
+
+<div class="social">
+
+
+<!-- TELEGRAM -->
+
+<a
+href="https://t.me/itvtime"
+target="_blank"
+rel="noopener noreferrer">
+
+<span class="social-icon">
+✈
+</span>
+
+Telegram: @itvtime
+
+</a>
+
+
+<!-- INSTAGRAM -->
+
+<a
+href="https://www.instagram.com/itv_time/"
+target="_blank"
+rel="noopener noreferrer">
+
+<span class="social-icon">
+◎
+</span>
+
+Instagram: @itv_time
+
+</a>
+
+
+<!-- YOUTUBE -->
+
+<a
+href="https://www.youtube.com/@itvtime-official"
+target="_blank"
+rel="noopener noreferrer">
+
+<span class="social-icon">
+▶
+</span>
+
+YouTube: @itvtime-official
+
+</a>
+
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+<div class="footer-inner">
+
+<div class="footer-logo">
+TIME TV
+</div>
+
+<p>
+© 2026 TIME TV. Всі права захищені.
+</p>
+
+<p>
+Твій час розваг
+</p>
+
+</div>
+
+</footer>
+
+
+
+<script>
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function openPage(pageId, button) {
+
+    /*
+     * Hide pages
+     */
+
+    document
+        .querySelectorAll(".page")
+        .forEach(page => {
+
+            page.classList.remove("active");
+
+        });
+
+
+    /*
+     * Show selected page
+     */
+
+    const page =
+        document.getElementById(pageId);
+
+    if (page) {
+
+        page.classList.add("active");
+
+    }
+
+
+    /*
+     * Reset buttons
+     */
+
+    document
+        .querySelectorAll(".nav button")
+        .forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+
+    /*
+     * Active button
+     */
+
+    if (button) {
+
+        button.classList.add("active");
+
+    } else {
+
+        /*
+         * If page opened from LIVE button
+         */
+
+        const buttons =
+            document.querySelectorAll(".nav button");
+
+        buttons.forEach(btn => {
+
+            if (
+                btn.textContent
+                .toLowerCase()
+                .includes(
+                    pageId === "home"
+                    ? "головна"
+                    : pageId === "live"
+                    ? "прямий"
+                    : pageId
+                )
+            ) {
+
+                btn.classList.add("active");
+
+            }
+
+        });
+
+    }
+
+
+    /*
+     * Close mobile menu
+     */
+
+    document
+        .getElementById("nav")
+        .classList.remove("open");
+
+
+    /*
+     * Scroll to top
+     */
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+function toggleMenu() {
+
+    document
+        .getElementById("nav")
+        .classList.toggle("open");
+
+}
+
+
+/* =========================================================
+   VIDEO
+========================================================= */
+
+document
+    .querySelectorAll("video")
+    .forEach(video => {
+
+        video.addEventListener(
+            "loadedmetadata",
+            () => {
+
+                video
+                    .play()
+                    .catch(() => {
+
+                        /*
+                         * Autoplay may be blocked
+                         * by the browser.
+                         */
+
+                    });
+
+            }
+        );
+
+    });
+
+
+/* =========================================================
+   ESC
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (event.key === "Escape") {
+
+            document
+                .getElementById("nav")
+                .classList.remove("open");
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+    </html>
